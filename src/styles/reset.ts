@@ -37,7 +37,6 @@ export default createGlobalStyle`
   body {
     background: var(--background);
     color: var(--black);
-
   }
   body, input, button, textarea, span, p {
     font-size: 1rem;
