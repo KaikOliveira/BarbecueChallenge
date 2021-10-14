@@ -2,7 +2,7 @@ import React from 'react';
 
 import type { NextPage } from 'next';
 
-import { BBQ } from '~/assets/icons';
+import { BBQ, Money, People } from '~/assets/icons';
 import { Header } from '~/components/Header';
 import { Container, AddNewBarbecue } from '~/styles/pages/schedule';
 
@@ -44,8 +44,15 @@ const agendas: NextPage = () => {
             </header>
 
             <footer>
-              <span>{item.amount}</span>
-              <span>{item.price}</span>
+              <aside>
+                <People />
+                <span>{item.amount}</span>
+              </aside>
+
+              <aside>
+                <Money />
+                <span>R${item.price}</span>
+              </aside>
             </footer>
           </div>
         ))}

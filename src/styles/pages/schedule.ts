@@ -24,6 +24,47 @@ export const Container = styled.div`
       background: var(--white);
       box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.06);
       border-radius: 0.3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2.2rem;
+      transition: all 0.3s ease-in;
+
+      &:hover {
+        background: #f7f7fc;
+        cursor: pointer;
+      }
+
+      header {
+        p {
+          color: var(--black);
+          font-weight: 800;
+          font-size: 2.8rem;
+        }
+
+        span {
+          color: var(--black);
+          font-weight: 700;
+          font-size: 2.1rem;
+        }
+      }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+
+        aside {
+          display: flex;
+          align-items: center;
+
+          span {
+            font-size: 2.1rem;
+            color: var(--black);
+            font-weight: 500;
+            margin-left: 1.1rem;
+          }
+        }
+      }
     }
   }
 `;
