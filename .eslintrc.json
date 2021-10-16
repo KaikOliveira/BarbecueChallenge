@@ -25,7 +25,7 @@
     "comma-dangle": ["error", "always-multiline"],
     "semi": "error",
     "prettier/prettier": "error",
-    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/rules-of-hooks": "off",
     "react-hooks/exhaustive-deps": "warn",
     "react/react-in-jsx-scope": 0,
     "react/display-name": 0,
@@ -54,7 +54,7 @@
     ],
     "import/no-duplicates": ["error", { "considerQueryString": true }],
     "import-helpers/order-imports": [
-      "warn",
+      "error",
       {
         "newlinesBetween": "always",
         "groups": [

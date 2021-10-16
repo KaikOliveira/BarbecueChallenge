@@ -4,7 +4,10 @@ import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import NProgress from 'nprogress';
 
+import { PortalModals } from '~/components/HOC/ChildPortalModals';
+import Portal from '~/components/HOC/Portal';
 import '~/styles/nprogress.css';
+import { ModalsProvider } from '~/hooks/useModals';
 import ResetStyle from '~/styles/reset';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -30,10 +33,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [router]);
 
   return (
-    <>
+    <ModalsProvider>
       <Component {...pageProps} />
       <ResetStyle />
-    </>
+      <Portal>
+        <PortalModals />
+      </Portal>
+    </ModalsProvider>
   );
 }
 export default MyApp;

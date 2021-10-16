@@ -4,6 +4,7 @@ import type { NextPage } from 'next';
 
 import { BBQ, Money, People } from '~/assets/icons';
 import { Header } from '~/components/Header';
+import { useModals } from '~/hooks/useModals';
 import { Container, AddNewBarbecue } from '~/styles/pages/schedule';
 
 const agendas: NextPage = () => {
@@ -31,6 +32,8 @@ const agendas: NextPage = () => {
     },
   ];
 
+  const { showCreateBBQ } = useModals();
+
   return (
     <Container>
       <Header small={true} />
@@ -57,7 +60,7 @@ const agendas: NextPage = () => {
           </div>
         ))}
 
-        <AddNewBarbecue>
+        <AddNewBarbecue onClick={() => showCreateBBQ()}>
           <aside>
             <BBQ />
           </aside>
