@@ -4,14 +4,14 @@ import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 
 import { Header } from '~/components/Header';
-import { Wrapper } from '~/styles/pages/signIn';
+import { Wrapper } from '~/styles/pagesStyles/signIn';
 
 type Form = {
   login: string;
   password: string;
 };
 
-export default function Home() {
+const Home: NextPage = () => {
   const { handleSubmit, register } = useForm();
   const router = useRouter();
 
@@ -34,4 +34,6 @@ export default function Home() {
       </form>
     </Wrapper>
   );
-}
+};
+
+export default Home;

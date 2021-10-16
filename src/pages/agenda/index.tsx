@@ -6,9 +6,9 @@ import { useRouter } from 'next/router';
 import { BBQ, Money, People } from '~/assets/icons';
 import { Header } from '~/components/Header';
 import { useModals } from '~/hooks/useModals';
-import { Container, AddNewBarbecue } from '~/styles/pages/schedule';
+import { Container, AddNewBarbecue } from '~/styles/pagesStyles/schedule';
 
-export default function agendas() {
+const agendas: NextPage = () => {
   const arr = [
     {
       id: 1,
@@ -75,4 +75,6 @@ export default function agendas() {
       </section>
     </Container>
   );
-}
+};
+
+export default agendas;
