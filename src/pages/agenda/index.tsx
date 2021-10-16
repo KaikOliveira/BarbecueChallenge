@@ -1,13 +1,14 @@
 import React from 'react';
 
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 
 import { BBQ, Money, People } from '~/assets/icons';
 import { Header } from '~/components/Header';
 import { useModals } from '~/hooks/useModals';
 import { Container, AddNewBarbecue } from '~/styles/pages/schedule';
 
-const agendas: NextPage = () => {
+export default function agendas() {
   const arr = [
     {
       id: 1,
@@ -33,6 +34,11 @@ const agendas: NextPage = () => {
   ];
 
   const { showCreateBBQ } = useModals();
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Container>
@@ -69,6 +75,4 @@ const agendas: NextPage = () => {
       </section>
     </Container>
   );
-};
-
-export default agendas;
+}

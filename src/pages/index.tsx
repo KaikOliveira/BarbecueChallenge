@@ -11,7 +11,7 @@ type Form = {
   password: string;
 };
 
-const Home: NextPage = () => {
+export default function Home() {
   const { handleSubmit, register } = useForm();
   const router = useRouter();
 
@@ -34,6 +34,4 @@ const Home: NextPage = () => {
       </form>
     </Wrapper>
   );
-};
-
-export default Home;
+}
