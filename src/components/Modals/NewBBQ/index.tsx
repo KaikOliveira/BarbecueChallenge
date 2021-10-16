@@ -55,7 +55,7 @@ export const NewBBQ: React.FC = () => {
         </CustomSheetStyled.Content>
       </CustomSheetStyled.Container>
 
-      <CustomSheetStyled.Backdrop onClick={() => showCreateBBQ()} />
+      <CustomSheetStyled.Backdrop onTap={() => showCreateBBQ()} />
     </CustomSheetStyled>
   );
 };
