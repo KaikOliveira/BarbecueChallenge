@@ -51,6 +51,11 @@ export const NewBBQ: React.FC = () => {
         <CustomSheetStyled.Content>
           <Container>
             <h1>test</h1>
+
+            <img
+              src="https://pbs.twimg.com/profile_images/1405191338723745792/WRrldeqv_400x400.jpg"
+              alt="eu"
+            />
           </Container>
         </CustomSheetStyled.Content>
       </CustomSheetStyled.Container>
