@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { useModals } from '~/hooks/useModals';
 
+import { DragBar } from '../DragBar/incdex';
 import { Container } from './styles';
 
 const CustomSheetStyled = styled(Sheet)`
@@ -47,15 +48,12 @@ export const NewBBQ: React.FC = () => {
   return (
     <CustomSheetStyled isOpen={createBBQ} onClose={showCreateBBQ} disableDrag>
       <CustomSheetStyled.Container>
-        <CustomSheetStyled.Header>{/* <DragBar /> */}</CustomSheetStyled.Header>
+        <CustomSheetStyled.Header>
+          <DragBar />
+        </CustomSheetStyled.Header>
         <CustomSheetStyled.Content>
           <Container>
-            <h1>test</h1>
-
-            <img
-              src="https://pbs.twimg.com/profile_images/1405191338723745792/WRrldeqv_400x400.jpg"
-              alt="eu"
-            />
+            <h1>Novo Churrasco</h1>
           </Container>
         </CustomSheetStyled.Content>
       </CustomSheetStyled.Container>
