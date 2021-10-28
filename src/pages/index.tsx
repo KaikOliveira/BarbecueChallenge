@@ -1,9 +1,13 @@
-import { useForm } from 'react-hook-form';
+import React from 'react';
+import { FiMail, FiLock } from 'react-icons/fi';
 
+import { FormHandles } from '@unform/core';
+import { Form } from '@unform/web';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 
 import { Header } from '~/components/Header';
+import { Input } from '~/components/Input';
 import { Wrapper } from '~/styles/pagesStyles/signIn';
 
 type Form = {
@@ -12,8 +16,8 @@ type Form = {
 };
 
 const Home: NextPage = () => {
-  const { handleSubmit, register } = useForm();
   const router = useRouter();
+  const formRef = React.useRef<FormHandles>(null);
 
   const handleSignIn = (values: Form) => {
     console.log(values);
@@ -22,16 +26,23 @@ const Home: NextPage = () => {
 
   return (
     <Wrapper>
-      <Header small={false} />
+      <Header small={false} title={false} />
 
-      <form onSubmit={handleSubmit(handleSignIn)}>
+      <Form ref={formRef} onSubmit={handleSignIn}>
+        <h1>Agenda Churrasco</h1>
+
         <span>Login</span>
-        <input type="text" placeholder="e-mail" {...register('login')} />
-        <span>Senha</span>
-        <input type="text" placeholder="senha" {...register('password')} />
+        <Input type="text" name="login" placeholder="e-mail" icon={FiMail} />
+        <span className="last">Senha</span>
+        <Input
+          type="password"
+          name="password"
+          placeholder="senha"
+          icon={FiLock}
+        />
 
         <button type="submit">Entrar</button>
-      </form>
+      </Form>
     </Wrapper>
   );
 };

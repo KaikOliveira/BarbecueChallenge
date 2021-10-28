@@ -42,7 +42,7 @@ const agendas: NextPage = () => {
 
   return (
     <Container>
-      <Header small={true} />
+      <Header small={true} title={true} />
 
       <section>
         {arr.map((item) => (

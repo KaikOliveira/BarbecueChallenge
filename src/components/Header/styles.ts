@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.header`
   width: 100%;
   height: 32.4rem;
-  background-color: var(--yellow);
+  background-color: var(--primary);
   background-image: url('/backgroundHeader.svg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -18,7 +18,7 @@ export const Container = styled.header`
 
   h1 {
     font-size: 3.2rem;
-    color: var(--black);
+    color: var(--white);
     font-weight: 800;
   }
 `;

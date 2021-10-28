@@ -90,7 +90,7 @@ export const AddNewBarbecue = styled.div`
     width: 9rem;
     height: 9rem;
     border-radius: 50%;
-    background: var(--yellow);
+    background: var(--primary);
     display: flex;
     align-items: center;
     justify-content: center;

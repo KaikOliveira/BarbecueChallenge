@@ -9,14 +9,21 @@ export default createGlobalStyle`
     scroll-behavior: smooth;
   }
   :root {
-    --background: #FAFAFA;
+    --background: #f5f5f5;
     --white: #fff;
     --black: #000;
     --text: #6A777D;
-    --yellow: #FFD836;
     --gray: #F1F1F1;
-    --yellowLow: #998220;
-    --yellowMedium:  #E5C231;
+    
+    --red: #e54b4b;
+    --title: #232129;
+    --text: #454851;
+    --placeholder: #666360;
+    --primary: #e93535;
+    --primary-high: #cddfdf;
+    --primary-low: #f3f7f7;
+    --text-low: #5e626e;
+    --text-high: #383b42;
   }
   html {
     font-size: 62.5%; /* = 10px */

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  background-color: var(--yellow);
   max-width: 100vw;
+  background: var(--background);
   height: 100vh;
   position: relative;
   display: flex;
@@ -11,53 +11,50 @@ export const Wrapper = styled.div`
 
   form {
     position: absolute;
-    top: 26rem;
+    top: 20rem;
     display: flex;
     flex-direction: column;
-    width: 30rem;
+    width: 39rem;
+    padding: 2.5rem 4.5rem;
+    background: var(--white);
+    border-radius: 1.3rem;
+    box-shadow: 0px 0.8rem 1.6rem rgba(17, 17, 17, 0.08);
 
-    input {
-      width: 100%;
-      height: 5rem;
-      box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.06);
-      border-radius: 0.25rem;
-      margin-bottom: 3rem;
-      border: 0 none;
-      padding-left: 1rem;
-      font-size: 1.8rem;
-      color: rgba(0, 0, 0, 0.9);
-      font-weight: 500;
-
-      &::placeholder {
-        color: rgba(0, 0, 0, 0.8);
-        font-weight: 400;
-        font-style: italic;
-        font-size: 1.8rem;
-      }
+    h1 {
+      margin-bottom: 4.5rem;
+      font-size: 3.2rem;
+      color: var(--title);
+      font-weight: 700;
+      letter-spacing: 0.075rem;
+      align-self: center;
     }
 
     span {
-      font-size: 2.1rem;
-      color: rgba(0, 0, 0, 0.8);
-      font-weight: 700;
-      margin-bottom: 1.6rem;
+      font-size: 1.6rem;
+      color: var(--text);
+      font-weight: 600;
+      margin-bottom: 1rem;
+
+      &.last {
+        margin-top: 2rem;
+      }
     }
 
     button {
       width: 100%;
       height: 5rem;
-      background: var(--black);
-      border-radius: 1.8rem;
+      background: var(--text);
+      border-radius: 0.8rem;
       box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.06);
       color: var(--white);
       border: 0 none;
       font-size: 1.8rem;
       font-weight: 700;
       transition: all 0.3s ease-in;
-      margin-top: 1.6rem;
+      margin-top: 2.6rem;
 
       &:hover {
-        background: rgba(0, 0, 0, 0.85);
+        background: var(--text-high);
       }
     }
   }
