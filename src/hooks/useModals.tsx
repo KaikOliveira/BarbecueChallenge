@@ -9,7 +9,7 @@ const ModalsContext = React.createContext<ModalsContextData>(
   {} as ModalsContextData
 );
 
-const ModalsProvider: React.FC = ({ children }) => {
+export const ModalsProvider: React.FC = ({ children }) => {
   const [createBBQ, setCreateBBQ] = React.useState<boolean>(false);
 
   const showCreateBBQ = () => setCreateBBQ(!createBBQ);
@@ -21,14 +21,4 @@ const ModalsProvider: React.FC = ({ children }) => {
   );
 };
 
-function useModals(): ModalsContextData {
-  const context = React.useContext(ModalsContext);
-
-  if (!context) {
-    throw new Error('useModals error');
-  }
-
-  return context;
-}
-
-export { ModalsProvider, useModals };
+export const useModals = () => React.useContext(ModalsContext);

@@ -20,8 +20,8 @@ export default createGlobalStyle`
     --text: #454851;
     --placeholder: #666360;
     --primary: #e93535;
-    --primary-high: #cddfdf;
-    --primary-low: #f3f7f7;
+    --primary-high: #A32525;
+    --primary-low: #FBD7D7;
     --text-low: #5e626e;
     --text-high: #383b42;
   }

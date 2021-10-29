@@ -23,7 +23,7 @@ export const Container = styled.div`
       height: 19.2rem;
       background: var(--white);
       box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.06);
-      border-radius: 0.3rem;
+      border-radius: 0.8rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -56,6 +56,7 @@ export const Container = styled.div`
         aside {
           display: flex;
           align-items: center;
+          color: var(--primary-high);
 
           span {
             font-size: 2.1rem;
@@ -76,7 +77,7 @@ export const AddNewBarbecue = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: var(--gray) !important;
+  background: #fafafa !important;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.13);
   border-radius: 0.4rem;
   cursor: pointer;
@@ -90,7 +91,7 @@ export const AddNewBarbecue = styled.div`
     width: 9rem;
     height: 9rem;
     border-radius: 50%;
-    background: var(--primary);
+    background: var(--primary-low);
     display: flex;
     align-items: center;
     justify-content: center;
