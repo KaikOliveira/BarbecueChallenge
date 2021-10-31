@@ -1,8 +1,13 @@
 import React from 'react';
+import { BsCalendarDate } from 'react-icons/bs';
+import { GiBarbecue } from 'react-icons/gi';
 import Sheet from 'react-modal-sheet';
 
+import { FormHandles } from '@unform/core';
+import { Form } from '@unform/web';
 import styled from 'styled-components';
 
+import { Input } from '~/components/Input';
 import { useModals } from '~/hooks/useModals';
 
 import { DragBar } from '../DragBar/incdex';
@@ -45,6 +50,12 @@ const CustomSheetStyled = styled(Sheet)`
 export const NewBBQ: React.FC = () => {
   const { createBBQ, showCreateBBQ } = useModals();
 
+  const formRef = React.useRef<FormHandles>(null);
+
+  function handleCreateBBQ() {
+    console.log('dsfgs');
+  }
+
   return (
     <CustomSheetStyled isOpen={createBBQ} onClose={showCreateBBQ} disableDrag>
       <CustomSheetStyled.Container>
@@ -54,6 +65,20 @@ export const NewBBQ: React.FC = () => {
         <CustomSheetStyled.Content>
           <Container>
             <h1>Novo Churrasco</h1>
+            <Form ref={formRef} onSubmit={handleCreateBBQ}>
+              <Input
+                name="churrasco"
+                placeholder="Nome do churrasco"
+                icon={GiBarbecue}
+              />
+
+              <Input
+                name="data"
+                placeholder="Data do churrasco"
+                icon={BsCalendarDate}
+                type="date"
+              />
+            </Form>
           </Container>
         </CustomSheetStyled.Content>
       </CustomSheetStyled.Container>

@@ -55,6 +55,20 @@ export const Container = styled.div<ContainerProps>`
     font-weight: 400;
     letter-spacing: 0.1rem;
 
+    &[type='date']::-webkit-inner-spin-button,
+    &[type='date']::-webkit-calendar-picker-indicator {
+      display: none;
+      -webkit-appearance: none;
+    }
+    &[type='date']:hover {
+      cursor: text;
+    }
+    &[type='number']::-webkit-inner-spin-button,
+    input[type='number']::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
     &::placeholder {
       color: var(--placeholder);
     }
