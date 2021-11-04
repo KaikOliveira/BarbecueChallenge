@@ -58,4 +58,8 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  .Toastify__toast-container {
+    z-index: 99999999 !important;
+  }
 `;

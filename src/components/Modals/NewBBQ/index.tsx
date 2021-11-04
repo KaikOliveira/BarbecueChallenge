@@ -1,10 +1,12 @@
 import React from 'react';
 import { BsCalendarDate } from 'react-icons/bs';
 import { GiBarbecue } from 'react-icons/gi';
+import { toast } from 'react-toastify';
 
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 
+import { CustomToast } from '~/components/CustomToast';
 import { Input } from '~/components/Input';
 import { useModals } from '~/hooks/useModals';
 
@@ -18,6 +20,17 @@ export const NewBBQ: React.FC = () => {
 
   function handleCreateBBQ() {
     console.log('dsfgs');
+    toast(
+      <CustomToast
+        status="success"
+        title="Parabens!"
+        message="Churrasco criado com sucesso!"
+      />,
+      {
+        icon: false,
+        autoClose: 5000,
+      }
+    );
   }
 
   return (
