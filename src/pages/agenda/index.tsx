@@ -33,7 +33,7 @@ const agendas: NextPage = () => {
     },
   ];
 
-  const { showCreateBBQ } = useModals();
+  const { showCreateBBQ, showDetailsBBQ } = useModals();
   const router = useRouter();
 
   if (router.isFallback) {
@@ -46,7 +46,7 @@ const agendas: NextPage = () => {
 
       <section>
         {arr.map((item) => (
-          <div key={item.id}>
+          <div key={item.id} onClick={() => showDetailsBBQ()}>
             <header>
               <p>{item.date}</p>
               <span>{item.name}</span>

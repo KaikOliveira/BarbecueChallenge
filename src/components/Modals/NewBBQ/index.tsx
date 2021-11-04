@@ -10,6 +10,7 @@ import { CustomToast } from '~/components/CustomToast';
 import { Input } from '~/components/Input';
 import { useModals } from '~/hooks/useModals';
 
+import { ButtonClose } from '../ButtonClose';
 import { DragBar } from '../DragBar/incdex';
 import { CustomSheetStyled, Container } from './styles';
 
@@ -19,7 +20,6 @@ export const NewBBQ: React.FC = () => {
   const formRef = React.useRef<FormHandles>(null);
 
   function handleCreateBBQ() {
-    console.log('dsfgs');
     toast(
       <CustomToast
         status="success"
@@ -31,6 +31,8 @@ export const NewBBQ: React.FC = () => {
         autoClose: 5000,
       }
     );
+
+    showCreateBBQ();
   }
 
   return (
@@ -38,6 +40,7 @@ export const NewBBQ: React.FC = () => {
       <CustomSheetStyled.Container>
         <CustomSheetStyled.Header>
           <DragBar />
+          <ButtonClose type="button" onClick={() => showCreateBBQ()} />
         </CustomSheetStyled.Header>
         <CustomSheetStyled.Content>
           <Container>

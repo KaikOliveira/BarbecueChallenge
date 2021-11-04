@@ -19,6 +19,8 @@ export const CustomSheetStyled = styled(Sheet)`
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: #f7f7fc;
+
     @media (max-width: 883px) {
       border-radius: 3.4rem 3.4rem 0px 0px !important;
       align-self: flex-end;

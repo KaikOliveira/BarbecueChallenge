@@ -14,6 +14,7 @@ export default createGlobalStyle`
     --black: #000;
     --text: #6A777D;
     --gray: #F1F1F1;
+    --gray-high: #76899F;
     
     --red: #e54b4b;
     --title: #232129;
