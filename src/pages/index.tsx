@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 
 import { Header } from '~/components/Header';
 import { Input } from '~/components/Input';
-import { Wrapper } from '~/styles/pagesStyles/signIn';
+import { Wrapper } from '~/styles/pages/signIn';
 
 type Form = {
   login: string;

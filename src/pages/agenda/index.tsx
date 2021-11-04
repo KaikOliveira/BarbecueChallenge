@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { BBQ, Money, People } from '~/assets/icons';
 import { Header } from '~/components/Header';
 import { useModals } from '~/hooks/useModals';
-import { Container, AddNewBarbecue } from '~/styles/pagesStyles/schedule';
+import { Container, AddNewBarbecue } from '~/styles/pages/schedule';
 
 const agendas: NextPage = () => {
   const arr = [
