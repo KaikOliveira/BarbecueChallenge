@@ -43,4 +43,11 @@ export const CustomSheetStyled = styled(Sheet)`
   }
 `;
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  background: #f7f7fc;
+`;
