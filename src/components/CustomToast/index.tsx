@@ -8,7 +8,7 @@ import { Container, MarkerContainer, IconContainer } from './styles';
 interface CustomToastData {
   title?: string;
   message: string;
-  status: string;
+  status: 'success' | 'warn' | 'error';
 }
 
 export const CustomToast = ({ title, message, status }: CustomToastData) => {

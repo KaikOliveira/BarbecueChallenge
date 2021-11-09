@@ -8,7 +8,7 @@ import { Form } from '@unform/web';
 
 import { CustomToast } from '~/components/CustomToast';
 import { Input } from '~/components/Input';
-import { useModals } from '~/hooks/useModals';
+import { useModals } from '~/hooks/contexts/useModals';
 
 import { ButtonClose } from '../ButtonClose';
 import { DragBar } from '../DragBar/incdex';

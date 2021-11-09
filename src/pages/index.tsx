@@ -1,32 +1,27 @@
 import React from 'react';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { FiUser, FiLock } from 'react-icons/fi';
-import { toast } from 'react-toastify';
 
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import type { NextPage } from 'next';
-import { useRouter } from 'next/router';
 import * as Yup from 'yup';
 
-import { CustomToast } from '~/components/CustomToast';
 import { Header } from '~/components/Header';
 import { Input } from '~/components/Input';
+import { useAuth } from '~/hooks/contexts/useAuth';
+import { ISignIn } from '~/interfaces/signIn';
 import { signInSchema } from '~/shared/validators/index';
 import * as Styled from '~/styles/pages/signIn';
 import { getValidationErrors } from '~/utils/getValidationErrors';
 
-type Form = {
-  login: string;
-  password: string;
-};
-
 const Home: NextPage = () => {
-  const router = useRouter();
   const formRef = React.useRef<FormHandles>(null);
   const [loading, setLoading] = React.useState(false);
 
-  const handleSignIn = async (values: Form) => {
+  const { signIn } = useAuth();
+
+  const handleSignIn = async (values: ISignIn) => {
     try {
       setLoading(true);
       formRef.current?.setErrors({});
@@ -35,19 +30,9 @@ const Home: NextPage = () => {
         abortEarly: false,
       });
 
-      toast(
-        <CustomToast
-          status="success"
-          title="Parabens!"
-          message="Autenticação realizado com sucesso!"
-        />,
-        {
-          icon: false,
-          autoClose: 5000,
-        }
-      );
+      await signIn(values);
+
       setLoading(false);
-      router.push('/agenda');
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
@@ -57,20 +42,8 @@ const Home: NextPage = () => {
 
         return;
       }
-
-      toast(
-        <CustomToast
-          status="error"
-          title="Erro na autenticação!"
-          message="Ocorreu um erro ao fazer login, cheque as credenciaais."
-        />,
-        {
-          icon: false,
-          autoClose: 5000,
-        }
-      );
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   return (
@@ -81,7 +54,7 @@ const Home: NextPage = () => {
         <h1>Agenda Churrasco</h1>
 
         <span>Usuário</span>
-        <Input type="text" name="login" placeholder="Usuário" icon={FiUser} />
+        <Input type="text" name="user" placeholder="Usuário" icon={FiUser} />
 
         <span className="last">Senha</span>
         <Input

@@ -10,8 +10,8 @@ export const Container = styled.div`
   z-index: 9999999999999999999;
 
   span {
-    color: var(--title);
-    font-weight: 400;
+    color: var(--text-high);
+    font-weight: 600;
     font-size: 1.3rem;
   }
 

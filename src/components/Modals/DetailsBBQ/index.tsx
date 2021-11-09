@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useModals } from '~/hooks/useModals';
+import { useModals } from '~/hooks/contexts/useModals';
 
 import { ButtonClose } from '../ButtonClose';
 import { DragBar } from '../DragBar/incdex';
