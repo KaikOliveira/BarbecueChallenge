@@ -43,7 +43,7 @@ export const Container = styled.div<ContainerProps>`
       svg {
         color: var(--primary-high);
       }
-      border: 0.3rem solid var(--gray);
+      border: 0.2rem solid var(--gray);
     `}
 
   input {
@@ -83,16 +83,22 @@ export const Container = styled.div<ContainerProps>`
 `;
 
 export const Error = styled(Tooltip)`
-  height: 20px;
-  margin-left: 16px;
+  height: 2rem;
+  margin-left: 1.6rem;
+
   svg {
     margin: 0;
   }
+
   span {
-    background: var(--red);
-    color: #fff;
+    background: var(--primary) !important;
+    color: var(--white) !important;
+    font-size: 1.3rem !important;
+    width: 14rem;
+    text-align: center;
+
     &::before {
-      border-color: var(--red) transparent;
+      border-color: var(--primary) transparent;
     }
   }
 `;

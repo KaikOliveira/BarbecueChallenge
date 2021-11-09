@@ -51,11 +51,48 @@ export const Wrapper = styled.div`
       font-size: 1.8rem;
       font-weight: 700;
       transition: all 0.3s ease-in;
-      margin-top: 2.6rem;
+      margin-top: 1.6rem;
 
       &:hover {
         background: var(--text-high);
       }
+
+      &:disabled {
+        cursor: not-allowed;
+
+        &:hover {
+          background: var(--text);
+          color: var(--white);
+        }
+      }
+
+      svg {
+        animation: loading 1.5s linear infinite;
+      }
+
+      @keyframes loading {
+        0% {
+          transform: rotateZ(0deg);
+        }
+        100% {
+          transform: rotateZ(-360deg);
+        }
+      }
     }
+  }
+`;
+
+export const LinkSignUp = styled.p`
+  align-self: center;
+  margin-top: 1.6rem;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--gray-high);
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+
+  &:hover {
+    text-decoration: underline;
+    color: var(--primary-high);
   }
 `;
