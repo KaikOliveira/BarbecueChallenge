@@ -1,7 +1,6 @@
 import React from 'react';
 
 import type { NextPage } from 'next';
-import { useRouter } from 'next/router';
 
 import { BBQ, Money, People } from '~/assets/icons';
 import { Header } from '~/components/Header';
@@ -34,11 +33,6 @@ const agendas: NextPage = () => {
   ];
 
   const { showCreateBBQ, showDetailsBBQ } = useModals();
-  const router = useRouter();
-
-  if (router.isFallback) {
-    return <div>Carregando...</div>;
-  }
 
   return (
     <Container>
