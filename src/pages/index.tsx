@@ -5,13 +5,14 @@ import { FiUser, FiLock } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import type { NextPage } from 'next';
+import Link from 'next/link';
 import * as Yup from 'yup';
 
 import { Header } from '~/components/Header';
 import { Input } from '~/components/Input';
 import { useAuth } from '~/hooks/contexts/useAuth';
-import { ISignIn } from '~/interfaces/signIn';
-import { signInSchema } from '~/shared/validators/index';
+import { ISignIn } from '~/interfaces/auth';
+import { signInSchema } from '~/shared/validators/authSchema';
 import * as Styled from '~/styles/pages/signIn';
 import { getValidationErrors } from '~/utils/getValidationErrors';
 
@@ -64,7 +65,9 @@ const Home: NextPage = () => {
           icon={FiLock}
         />
 
-        <Styled.LinkSignUp>Criar nova conta</Styled.LinkSignUp>
+        <Link href="/cadastro">
+          <Styled.LinkSignUp>Criar nova conta</Styled.LinkSignUp>
+        </Link>
 
         <button type="submit" disabled={loading}>
           {loading ? <AiOutlineLoading3Quarters size={20} /> : 'Entrar'}

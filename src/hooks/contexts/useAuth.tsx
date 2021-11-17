@@ -5,11 +5,12 @@ import { useRouter } from 'next/router';
 import { setCookie } from 'nookies';
 
 import { CustomToast } from '~/components/CustomToast';
-import { ISignIn } from '~/interfaces/signIn';
+import { ISignIn, ISignUp } from '~/interfaces/auth';
 import { api } from '~/services/api';
 
 interface AuthContextData {
   signIn(credentials: ISignIn): Promise<void>;
+  signUp(credentials: ISignUp): Promise<void>;
 }
 
 export const AuthContext = React.createContext({} as AuthContextData);
@@ -84,8 +85,44 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }
 
+  async function signUp(data: ISignUp) {
+    try {
+      await api.post('users', data);
+
+      toast(
+        <CustomToast
+          status="success"
+          title="Parabéns!"
+          message="Cadastro realizado com sucesso."
+        />,
+        {
+          icon: false,
+          autoClose: 5000,
+        }
+      );
+
+      router.push('/');
+    } catch (err) {
+      console.log(err);
+
+      toast(
+        <CustomToast
+          status="error"
+          title="Error!"
+          message="Ocorreu um erro ao realizar cadastro."
+        />,
+        {
+          icon: false,
+          autoClose: 5000,
+        }
+      );
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ signIn }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ signIn, signUp }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 

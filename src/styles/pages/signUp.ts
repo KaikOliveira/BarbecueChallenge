@@ -12,7 +12,7 @@ export const Container = styled.div`
 
   form {
     position: absolute;
-    top: 28rem;
+    top: 24rem;
     display: flex;
     flex-direction: column;
     width: 39rem;
@@ -22,7 +22,7 @@ export const Container = styled.div`
     box-shadow: 0px 0.8rem 1.6rem rgba(17, 17, 17, 0.08);
 
     h1 {
-      margin-bottom: 4.5rem;
+      margin-bottom: 1rem;
       font-size: 3.2rem;
       color: var(--title);
       font-weight: 700;
