@@ -5,6 +5,7 @@ import { FiLock, FiUser } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import type { NextPage } from 'next';
+import Link from 'next/link';
 import * as Yup from 'yup';
 
 import { Header } from '~/components/Header';
@@ -12,7 +13,7 @@ import { Input } from '~/components/Input';
 import { useAuth } from '~/hooks/contexts/useAuth';
 import { ISignUp } from '~/interfaces/auth';
 import { signUpSchema } from '~/shared/validators/authSchema';
-import { Container } from '~/styles/pages/signUp';
+import { Container, LinkSignIn } from '~/styles/pages/signUp';
 import { getValidationErrors } from '~/utils/getValidationErrors';
 
 const signUp: NextPage = () => {
@@ -68,6 +69,10 @@ const signUp: NextPage = () => {
           placeholder="Senha"
           icon={FiLock}
         />
+
+        <Link href="/">
+          <LinkSignIn>Entrar</LinkSignIn>
+        </Link>
 
         <button type="submit" disabled={loading}>
           {loading ? <AiOutlineLoading3Quarters size={20} /> : 'Finalizar'}
