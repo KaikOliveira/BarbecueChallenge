@@ -1,6 +1,7 @@
 import React from 'react';
 import { BsCalendarDate } from 'react-icons/bs';
 import { GiBarbecue } from 'react-icons/gi';
+import { MdAttachMoney } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
 import { FormHandles } from '@unform/core';
@@ -57,6 +58,13 @@ export const NewBBQ: React.FC = () => {
                 placeholder="Data do churrasco"
                 icon={BsCalendarDate}
                 type="date"
+              />
+
+              <Input
+                name="priceTotal"
+                placeholder="Valor a ser recadado"
+                icon={MdAttachMoney}
+                type="number"
               />
 
               <button type="submit">Salvar</button>
