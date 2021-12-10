@@ -6,6 +6,7 @@ import { BBQ, Money, People } from '~/assets/icons';
 import { Header } from '~/components/Header';
 import { useModals } from '~/hooks/contexts/useModals';
 import { Container, AddNewBarbecue } from '~/styles/pages/schedule';
+import { withSSRAuth } from '~/utils/withSSRAuth';
 
 const agendas: NextPage = () => {
   const arr = [
@@ -70,5 +71,9 @@ const agendas: NextPage = () => {
     </Container>
   );
 };
+
+export const getServerSideProps = withSSRAuth(async () => ({
+  props: {},
+}));
 
 export default agendas;
