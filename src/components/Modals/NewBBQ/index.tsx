@@ -1,4 +1,5 @@
 import React from 'react';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { BsCalendarDate } from 'react-icons/bs';
 import { GiBarbecue } from 'react-icons/gi';
 import { MdAttachMoney } from 'react-icons/md';
@@ -6,34 +7,85 @@ import { toast } from 'react-toastify';
 
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
+import * as Yup from 'yup';
 
 import { CustomToast } from '~/components/CustomToast';
 import { Input } from '~/components/Input';
 import { useModals } from '~/hooks/contexts/useModals';
+import { api } from '~/services/api';
+import { createSchedule } from '~/shared/validators/scheduleSchema';
+import { getValidationErrors } from '~/utils/getValidationErrors';
 
 import { ButtonClose } from '../ButtonClose';
 import { DragBar } from '../DragBar/incdex';
 import { CustomSheetStyled, Container } from './styles';
 
+interface IFormCreateBBQ {
+  churrasco: string;
+  data: string;
+  priceTotal?: string;
+}
+
 export const NewBBQ: React.FC = () => {
   const { createBBQ, showCreateBBQ } = useModals();
+  const [loading, setLoading] = React.useState(false);
 
   const formRef = React.useRef<FormHandles>(null);
 
-  function handleCreateBBQ() {
-    toast(
-      <CustomToast
-        status="success"
-        title="Parabens!"
-        message="Churrasco criado com sucesso!"
-      />,
-      {
-        icon: false,
-        autoClose: 5000,
-      }
-    );
+  async function handleCreateBBQ(values: IFormCreateBBQ) {
+    try {
+      setLoading(true);
+      formRef.current?.setErrors({});
 
-    showCreateBBQ();
+      await createSchedule.validate(values, {
+        abortEarly: false,
+      });
+
+      const data = {
+        title: values.churrasco,
+        date: '01/20',
+        priceTotal: values.priceTotal,
+      };
+
+      await api.post('schedules/create', data);
+
+      toast(
+        <CustomToast
+          status="success"
+          title="Parabens!"
+          message="Churrasco criado com sucesso!"
+        />,
+        {
+          icon: false,
+          autoClose: 5000,
+        }
+      );
+      showCreateBBQ();
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      if (err instanceof Yup.ValidationError) {
+        const errors = getValidationErrors(err);
+
+        formRef.current?.setErrors(errors);
+        setLoading(false);
+
+        return;
+      }
+
+      toast(
+        <CustomToast
+          status="error"
+          title="Error!"
+          message="Error ao criar um churrasco!"
+        />,
+        {
+          icon: false,
+          autoClose: 5000,
+        }
+      );
+      setLoading(false);
+    }
   }
 
   return (
@@ -67,7 +119,9 @@ export const NewBBQ: React.FC = () => {
                 type="number"
               />
 
-              <button type="submit">Salvar</button>
+              <button type="submit">
+                {loading ? <AiOutlineLoading3Quarters size={20} /> : 'Salvar'}
+              </button>
             </Form>
           </Container>
         </CustomSheetStyled.Content>
