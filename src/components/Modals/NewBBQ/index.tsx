@@ -7,11 +7,13 @@ import { toast } from 'react-toastify';
 
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
+import { parseCookies } from 'nookies';
 import * as Yup from 'yup';
 
 import { CustomToast } from '~/components/CustomToast';
 import { Input } from '~/components/Input';
 import { useModals } from '~/hooks/contexts/useModals';
+import { useSchedule } from '~/hooks/querys/useSchedules';
 import { api } from '~/services/api';
 import { createSchedule } from '~/shared/validators/scheduleSchema';
 import { getValidationErrors } from '~/utils/getValidationErrors';
@@ -27,9 +29,11 @@ interface IFormCreateBBQ {
 }
 
 export const NewBBQ: React.FC = () => {
+  const cookies = parseCookies();
   const { createBBQ, showCreateBBQ } = useModals();
-  const [loading, setLoading] = React.useState(false);
+  const { refetch } = useSchedule();
 
+  const [loading, setLoading] = React.useState(false);
   const formRef = React.useRef<FormHandles>(null);
 
   async function handleCreateBBQ(values: IFormCreateBBQ) {
@@ -47,7 +51,12 @@ export const NewBBQ: React.FC = () => {
         priceTotal: values.priceTotal,
       };
 
-      await api.post('schedules/create', data);
+      const headers = {
+        Authorization: `Bearer ${cookies['@Barbecue:token']}`,
+      };
+
+      await api.post('schedules/create', data, { headers });
+      refetch();
 
       toast(
         <CustomToast
@@ -60,8 +69,8 @@ export const NewBBQ: React.FC = () => {
           autoClose: 5000,
         }
       );
-      showCreateBBQ();
       setLoading(false);
+      showCreateBBQ();
     } catch (err) {
       console.log(err);
       if (err instanceof Yup.ValidationError) {
