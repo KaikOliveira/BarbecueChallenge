@@ -1,61 +1,38 @@
 import React from 'react';
 
-import type { NextPage } from 'next';
-
 import { BBQ, Money, People } from '~/assets/icons';
 import { Header } from '~/components/Header';
 import { useModals } from '~/hooks/contexts/useModals';
+import { getAllSchedule, useSchedule } from '~/hooks/querys/useSchedules';
+import { ISchedules } from '~/interfaces/schedule';
 import { Container, AddNewBarbecue } from '~/styles/pages/schedule';
 import { withSSRAuth } from '~/utils/withSSRAuth';
 
-const agendas: NextPage = () => {
-  const arr = [
-    {
-      id: 1,
-      name: 'Niver',
-      date: '01/12',
-      amount: 15,
-      price: 280,
-    },
-    {
-      id: 2,
-      name: 'Niver Guelviin',
-      date: '01/12',
-      amount: 15,
-      price: 250,
-    },
-    {
-      id: 3,
-      name: 'Niver Tigrão',
-      date: '01/12',
-      amount: 15,
-      price: 320,
-    },
-  ];
-
+const agendas = ({ arrSchedules }) => {
   const { showCreateBBQ, showDetailsBBQ } = useModals();
+  const { data } = useSchedule({ initialData: arrSchedules });
 
   return (
     <Container>
       <Header small={true} title={true} />
 
       <section>
-        {arr.map((item) => (
+        {data.map((item: ISchedules) => (
           <div key={item.id} onClick={() => showDetailsBBQ()}>
             <header>
               <p>{item.date}</p>
-              <span>{item.name}</span>
+              <span>{item.title}</span>
             </header>
 
             <footer>
               <aside>
                 <People />
-                <span>{item.amount}</span>
+                <span>{item.amountPeople}</span>
               </aside>
 
               <aside>
                 <Money />
-                <span>R${item.price}</span>
+                <span>R${item.priceTotal}</span>
               </aside>
             </footer>
           </div>
@@ -72,8 +49,11 @@ const agendas: NextPage = () => {
   );
 };
 
-export const getServerSideProps = withSSRAuth(async () => ({
-  props: {},
-}));
-
 export default agendas;
+
+export const getServerSideProps = withSSRAuth(async (ctx) => {
+  const data = await getAllSchedule(ctx);
+  return {
+    props: { arrSchedules: data },
+  };
+});

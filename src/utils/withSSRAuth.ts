@@ -1,10 +1,20 @@
+import {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  GetServerSidePropsResult,
+} from 'next';
 import { destroyCookie, parseCookies } from 'nookies';
 
-export function withSSRAuth(fn: any) {
-  return async (ctx: any) => {
-    const cookies = parseCookies(ctx);
+import { AuthTokenError } from '~/shared/Errors/AuthTokenError';
 
-    if (!cookies['@Barbecue:token']) {
+export function withSSRAuth<P>(fn: GetServerSideProps<P>) {
+  return async (
+    ctx: GetServerSidePropsContext
+  ): Promise<GetServerSidePropsResult<P> | undefined> => {
+    const cookies = parseCookies(ctx);
+    const token = cookies['@Barbecue:token'];
+
+    if (!token) {
       return {
         redirect: {
           destination: '/',
@@ -12,12 +22,14 @@ export function withSSRAuth(fn: any) {
         },
       };
     }
+
     try {
       return await fn(ctx);
     } catch (err) {
-      if (err) {
-        console.log('erro no token');
+      if (err instanceof AuthTokenError) {
         destroyCookie(ctx, '@Barbecue:token');
+        destroyCookie(ctx, '@Barbecue:user');
+
         return {
           redirect: {
             destination: '/',
