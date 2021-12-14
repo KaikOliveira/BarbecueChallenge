@@ -1,4 +1,4 @@
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery } from 'react-query';
 
 import { GetServerSidePropsContext } from 'next';
 import { parseCookies } from 'nookies';
@@ -19,7 +19,7 @@ export async function getAllSchedule(
   return data;
 }
 
-export function useSchedule(options?: UseQueryOptions) {
+export function useSchedule(options?: any) {
   const { data: schedulesData, ...rest } = useQuery(
     ['schedules'],
     () => getAllSchedule(),
