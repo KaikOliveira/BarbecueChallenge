@@ -20,18 +20,6 @@ export async function getAllSchedule(
 }
 
 export function useSchedule(options?: any | unknown) {
-  // const { data: schedulesData, ...rest } = useQuery(
-  //   ['schedules'],
-  //   () => getAllSchedule(),
-  //   {
-  //     staleTime: 50000, //, 5 minutos
-  //     ...options,
-  //   }
-  // );
-
-  // const data = schedulesData as IArraySchedules;
-
-  // return { data, ...rest };
   return useQuery('schedules', () => getAllSchedule(), {
     ...options,
     staleTime: 50000,
