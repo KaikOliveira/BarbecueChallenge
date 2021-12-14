@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery, UseQueryOptions } from 'react-query';
 
 import { GetServerSidePropsContext } from 'next';
 import { parseCookies } from 'nookies';
@@ -19,17 +19,21 @@ export async function getAllSchedule(
   return data;
 }
 
-export function useSchedule(options?: any) {
-  const { data: schedulesData, ...rest } = useQuery(
-    ['schedules'],
-    () => getAllSchedule(),
-    {
-      staleTime: 50000, // 5 minutos
-      ...options,
-    }
-  );
+export function useSchedule(options?: any | unknown) {
+  // const { data: schedulesData, ...rest } = useQuery(
+  //   ['schedules'],
+  //   () => getAllSchedule(),
+  //   {
+  //     staleTime: 50000, //, 5 minutos
+  //     ...options,
+  //   }
+  // );
 
-  const data = schedulesData as IArraySchedules;
+  // const data = schedulesData as IArraySchedules;
 
-  return { data, ...rest };
+  // return { data, ...rest };
+  return useQuery('schedules', () => getAllSchedule(), {
+    ...options,
+    staleTime: 50000,
+  });
 }
