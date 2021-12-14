@@ -8,7 +8,7 @@ import { ISchedules } from '~/interfaces/schedule';
 import { Container, AddNewBarbecue } from '~/styles/pages/schedule';
 import { withSSRAuth } from '~/utils/withSSRAuth';
 
-const agendas = ({ arrSchedules }) => {
+const agendas = ({ arrSchedules }: any) => {
   const { showCreateBBQ, showDetailsBBQ } = useModals();
   const { data } = useSchedule({ initialData: arrSchedules });
 
