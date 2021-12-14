@@ -4,11 +4,15 @@ import { BBQ, Money, People } from '~/assets/icons';
 import { Header } from '~/components/Header';
 import { useModals } from '~/hooks/contexts/useModals';
 import { getAllSchedule, useSchedule } from '~/hooks/querys/useSchedules';
-import { ISchedules } from '~/interfaces/schedule';
+import { IArraySchedules, ISchedules } from '~/interfaces/schedule';
 import { Container, AddNewBarbecue } from '~/styles/pages/schedule';
 import { withSSRAuth } from '~/utils/withSSRAuth';
 
-const agendas = ({ arrSchedules }) => {
+interface Props {
+  arrSchedules: IArraySchedules;
+}
+
+const agendas = ({ arrSchedules }: Props) => {
   const { showCreateBBQ, showDetailsBBQ } = useModals();
   const { data } = useSchedule({ initialData: arrSchedules });
 
@@ -17,7 +21,7 @@ const agendas = ({ arrSchedules }) => {
       <Header small={true} title={true} />
 
       <section>
-        {data.map((item: ISchedules) => (
+        {data?.schedules.map((item: ISchedules) => (
           <div key={item.id} onClick={() => showDetailsBBQ()}>
             <header>
               <p>{item.date}</p>
