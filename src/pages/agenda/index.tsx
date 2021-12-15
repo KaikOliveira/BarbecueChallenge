@@ -1,6 +1,8 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 
 import { BBQ, Money, People } from '~/assets/icons';
+import { CustomToast } from '~/components/CustomToast';
 import { Header } from '~/components/Header';
 import { useModals } from '~/hooks/contexts/useModals';
 import { getAllSchedule, useSchedule } from '~/hooks/querys/useSchedules';
@@ -12,13 +14,33 @@ const agendas = ({ arrSchedules }: any) => {
   const { showCreateBBQ, showDetailsBBQ } = useModals();
   const { data } = useSchedule({ initialData: arrSchedules });
 
+  function handleCreateSchedule() {
+    if (data) {
+      if (data?.length >= 3) {
+        toast(
+          <CustomToast
+            status="warn"
+            title="Atenção!"
+            message="Usuário só pode ter 3 agendas."
+          />,
+          {
+            icon: false,
+            autoClose: 5000,
+          }
+        );
+        return;
+      }
+    }
+    showDetailsBBQ();
+  }
+
   return (
     <Container>
       <Header small={true} title={true} />
 
       <section>
         {data?.map((item: ISchedules) => (
-          <div key={item.id} onClick={() => showDetailsBBQ()}>
+          <div key={item.id} onClick={() => showCreateBBQ()}>
             <header>
               <p>{item.date}</p>
               <span>{item.title}</span>
@@ -38,7 +60,7 @@ const agendas = ({ arrSchedules }: any) => {
           </div>
         ))}
 
-        <AddNewBarbecue onClick={() => showCreateBBQ()}>
+        <AddNewBarbecue onClick={() => handleCreateSchedule()}>
           <aside>
             <BBQ />
           </aside>

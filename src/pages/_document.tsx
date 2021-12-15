@@ -15,7 +15,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
 
-          <meta name="theme-color" content="#FFD836" />
+          <meta name="theme-color" content="#e93535" />
 
           <title>Agenda de Churras</title>
         </Head>
