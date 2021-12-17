@@ -4,8 +4,13 @@ import { FiUser, FiLock } from 'react-icons/fi';
 
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
-import type { NextPage } from 'next';
+import type {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  NextPage,
+} from 'next';
 import Link from 'next/link';
+import { parseCookies } from 'nookies';
 import * as Yup from 'yup';
 
 import { Header } from '~/components/Header';
@@ -78,3 +83,20 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { '@Barbecue:token': token } = parseCookies(ctx);
+
+  if (token) {
+    return {
+      redirect: {
+        destination: '/agenda',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
