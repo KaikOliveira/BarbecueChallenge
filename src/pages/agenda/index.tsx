@@ -31,7 +31,7 @@ const agendas = ({ arrSchedules }: any) => {
         return;
       }
     }
-    showDetailsBBQ();
+    showCreateBBQ();
   }
 
   return (
@@ -40,7 +40,7 @@ const agendas = ({ arrSchedules }: any) => {
 
       <section>
         {data?.map((item: ISchedules) => (
-          <div key={item.id} onClick={() => showCreateBBQ()}>
+          <div key={item.id} onClick={() => showDetailsBBQ(item.id)}>
             <header>
               <p>{item.date}</p>
               <span>{item.title}</span>
