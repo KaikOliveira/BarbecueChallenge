@@ -98,7 +98,7 @@ export const NewBBQ: React.FC = () => {
   }
 
   return (
-    <CustomSheetStyled isOpen={createBBQ} onClose={showCreateBBQ} disableDrag>
+    <CustomSheetStyled isOpen={createBBQ} onClose={showCreateBBQ}>
       <CustomSheetStyled.Container>
         <CustomSheetStyled.Header>
           <DragBar />
