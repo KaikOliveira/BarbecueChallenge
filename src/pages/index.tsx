@@ -4,22 +4,18 @@ import { FiUser, FiLock } from 'react-icons/fi';
 
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
-import type {
-  GetServerSideProps,
-  GetServerSidePropsContext,
-  NextPage,
-} from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
-import { parseCookies } from 'nookies';
 import * as Yup from 'yup';
 
 import { Header } from '~/components/Header';
 import { Input } from '~/components/Input';
 import { useAuth } from '~/hooks/contexts/useAuth';
-import { ISignIn } from '~/interfaces/auth';
 import { signInSchema } from '~/shared/validators/authSchema';
 import * as Styled from '~/styles/pages/signIn';
+import { ISignIn } from '~/types/auth';
 import { getValidationErrors } from '~/utils/getValidationErrors';
+import { withSSRGuest } from '~/utils/security/withSSRGuest';
 
 const Home: NextPage = () => {
   const formRef = React.useRef<FormHandles>(null);
@@ -37,19 +33,15 @@ const Home: NextPage = () => {
       });
 
       await signIn(values);
-
-      setLoading(false);
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
 
         formRef.current?.setErrors(errors);
-        setLoading(false);
-
-        return;
       }
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
@@ -84,19 +76,8 @@ const Home: NextPage = () => {
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { '@Barbecue:token': token } = parseCookies(ctx);
-
-  if (token) {
-    return {
-      redirect: {
-        destination: '/agenda',
-        permanent: false,
-      },
-    };
-  }
-
+export const getServerSideProps: GetServerSideProps = withSSRGuest(async () => {
   return {
     props: {},
   };
-};
+});

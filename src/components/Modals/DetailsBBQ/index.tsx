@@ -5,7 +5,7 @@ import { parseCookies } from 'nookies';
 
 import { CustomToast } from '~/components/CustomToast';
 import { useModals } from '~/hooks/contexts/useModals';
-import { api } from '~/services/api';
+import { api } from '~/services/client';
 
 import { ButtonClose } from '../ButtonClose';
 import { DragBar } from '../DragBar/incdex';
@@ -46,7 +46,6 @@ export const DetailsBBQ: React.FC = () => {
 
       setData(details);
     } catch (err) {
-      console.log(err);
       onCloseDetailsBQQ();
       toast(
         <CustomToast

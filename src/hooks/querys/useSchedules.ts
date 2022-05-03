@@ -1,27 +1,28 @@
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useMutation, useQuery, UseQueryOptions } from 'react-query';
 
-import { GetServerSidePropsContext } from 'next';
-import { parseCookies } from 'nookies';
+import { queryClient } from '~/services/reactQuery/queryClient';
+import { schedulesService } from '~/services/useCases/schedulesService';
+import { ISchedules } from '~/types/schedule';
 
-import { IArraySchedules } from '~/interfaces/schedule';
-import { api } from '~/services/api';
+export const useGetSchedules = (options: UseQueryOptions) => {
+  const { data: items, ...rest } = useQuery(
+    ['schedules'],
+    () => schedulesService.getAllSchedule(),
+    {
+      staleTime: 1000 * 60 * 20, // 20 minutes
+      ...options,
+    }
+  );
 
-export async function getAllSchedule(
-  ctx?: GetServerSidePropsContext
-): Promise<IArraySchedules> {
-  const cookies = parseCookies(ctx);
-  const headers = {
-    Authorization: `Bearer ${cookies['@Barbecue:token']}`,
-  };
+  const data = items as ISchedules[];
 
-  const { data } = await api.get('schedules/all', { headers });
+  return { data, ...rest };
+};
 
-  return data;
-}
-
-export function useSchedule(options?: any | unknown) {
-  return useQuery('schedules', () => getAllSchedule(), {
-    ...options,
-    staleTime: 50000,
+export const useCreateSchedule = () => {
+  return useMutation(schedulesService.createSchedule, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('schedules');
+    },
   });
-}
+};

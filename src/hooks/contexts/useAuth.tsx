@@ -5,8 +5,9 @@ import { useRouter } from 'next/router';
 import { setCookie } from 'nookies';
 
 import { CustomToast } from '~/components/CustomToast';
-import { ISignIn, ISignUp } from '~/interfaces/auth';
-import { api } from '~/services/api';
+import { api } from '~/services/client';
+import { authService } from '~/services/useCases/authServices';
+import { ISignIn, ISignUp } from '~/types/auth';
 
 interface AuthContextData {
   signIn(credentials: ISignIn): Promise<void>;
@@ -20,11 +21,9 @@ interface AuthProviderProps {
 }
 
 interface IRspSessions {
-  data: {
-    id: number;
-    user: string;
-    token: string;
-  };
+  id: number;
+  user: string;
+  token: string;
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
@@ -32,7 +31,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   async function signIn(info: ISignIn) {
     try {
-      const { data }: IRspSessions = await api.post('sessions', info);
+      const data: IRspSessions = await authService.signIn(info);
 
       api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
 
@@ -67,8 +66,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
       router.push('/agenda');
     } catch (err) {
-      console.log(err);
-
       toast(
         <CustomToast
           status="error"
@@ -87,7 +84,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   async function signUp(data: ISignUp) {
     try {
-      await api.post('users', data);
+      await authService.signUp(data);
 
       toast(
         <CustomToast
@@ -103,8 +100,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
       router.push('/');
     } catch (err) {
-      console.log(err);
-
       toast(
         <CustomToast
           status="error"

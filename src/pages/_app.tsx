@@ -8,7 +8,7 @@ import type { AppProps } from 'next/app';
 import { PortalModals } from '~/components/HOC/ChildPortalModals';
 import '~/styles/nprogress.css';
 import { UseContexts } from '~/hooks/useContexts';
-import { queryClient } from '~/services/queryClient';
+import { queryClient } from '~/services/reactQuery/queryClient';
 import ResetStyle from '~/styles/reset';
 
 import 'react-toastify/dist/ReactToastify.css';

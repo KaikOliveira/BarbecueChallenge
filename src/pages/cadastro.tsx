@@ -6,16 +6,16 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import type { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
-import { parseCookies } from 'nookies';
 import * as Yup from 'yup';
 
 import { Header } from '~/components/Header';
 import { Input } from '~/components/Input';
 import { useAuth } from '~/hooks/contexts/useAuth';
-import { ISignUp } from '~/interfaces/auth';
 import { signUpSchema } from '~/shared/validators/authSchema';
 import { Container, LinkSignIn } from '~/styles/pages/signUp';
+import { ISignUp } from '~/types/auth';
 import { getValidationErrors } from '~/utils/getValidationErrors';
+import { withSSRGuest } from '~/utils/security/withSSRGuest';
 
 const signUp: NextPage = () => {
   const formRef = React.useRef<FormHandles>(null);
@@ -34,20 +34,15 @@ const signUp: NextPage = () => {
       });
 
       await signUp(values);
-
-      setLoading(false);
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
 
         formRef.current?.setErrors(errors);
-        setLoading(false);
-
-        return;
       }
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
@@ -85,19 +80,8 @@ const signUp: NextPage = () => {
 
 export default signUp;
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { '@Barbecue:token': token } = parseCookies(ctx);
-
-  if (token) {
-    return {
-      redirect: {
-        destination: '/agenda',
-        permanent: false,
-      },
-    };
-  }
-
+export const getServerSideProps: GetServerSideProps = withSSRGuest(async () => {
   return {
     props: {},
   };
-};
+});

@@ -7,15 +7,13 @@ import { toast } from 'react-toastify';
 
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
-import { parseCookies } from 'nookies';
 import * as Yup from 'yup';
 
 import { CustomToast } from '~/components/CustomToast';
 import { Input } from '~/components/Input';
 import { useModals } from '~/hooks/contexts/useModals';
-import { useSchedule } from '~/hooks/querys/useSchedules';
-import { api } from '~/services/api';
-import { createSchedule } from '~/shared/validators/scheduleSchema';
+import { useCreateSchedule } from '~/hooks/querys/useSchedules';
+import { createScheduleSchema } from '~/shared/validators/scheduleSchema';
 import { getValidationErrors } from '~/utils/getValidationErrors';
 
 import { ButtonClose } from '../ButtonClose';
@@ -29,9 +27,8 @@ interface IFormCreateBBQ {
 }
 
 export const NewBBQ: React.FC = () => {
-  const cookies = parseCookies();
   const { createBBQ, showCreateBBQ } = useModals();
-  const { refetch } = useSchedule();
+  const { mutateAsync: createSchedule } = useCreateSchedule();
 
   const [loading, setLoading] = React.useState(false);
   const formRef = React.useRef<FormHandles>(null);
@@ -41,22 +38,17 @@ export const NewBBQ: React.FC = () => {
       setLoading(true);
       formRef.current?.setErrors({});
 
-      await createSchedule.validate(values, {
+      await createScheduleSchema.validate(values, {
         abortEarly: false,
       });
 
       const data = {
         title: values.churrasco,
         date: '01/20',
-        priceTotal: values.priceTotal,
+        priceTotal: values.priceTotal!,
       };
 
-      const headers = {
-        Authorization: `Bearer ${cookies['@Barbecue:token']}`,
-      };
-
-      await api.post('schedules/create', data, { headers });
-      refetch();
+      await createSchedule(data);
 
       toast(
         <CustomToast
@@ -69,16 +61,12 @@ export const NewBBQ: React.FC = () => {
           autoClose: 5000,
         }
       );
-      setLoading(false);
       showCreateBBQ();
     } catch (err) {
-      console.log(err);
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
 
         formRef.current?.setErrors(errors);
-        setLoading(false);
-
         return;
       }
 
@@ -93,6 +81,7 @@ export const NewBBQ: React.FC = () => {
           autoClose: 5000,
         }
       );
+    } finally {
       setLoading(false);
     }
   }

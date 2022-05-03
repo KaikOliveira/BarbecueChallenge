@@ -7,8 +7,10 @@ export interface ISchedules {
   idUser: number;
 }
 
-// export interface IArraySchedules {
-//   schedules: ISchedules[];
-// }
-
 export type IArraySchedules = ISchedules[];
+
+export interface CreateSchedulePayload {
+  title: string;
+  date: string;
+  priceTotal: string;
+}

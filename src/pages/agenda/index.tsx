@@ -5,32 +5,38 @@ import { BBQ, Money, People } from '~/assets/icons';
 import { CustomToast } from '~/components/CustomToast';
 import { Header } from '~/components/Header';
 import { useModals } from '~/hooks/contexts/useModals';
-import { getAllSchedule, useSchedule } from '~/hooks/querys/useSchedules';
-import { ISchedules } from '~/interfaces/schedule';
+import { useGetSchedules } from '~/hooks/querys/useSchedules';
+import { setupAPI } from '~/services/client';
 import { Container, AddNewBarbecue } from '~/styles/pages/schedule';
-import { withSSRAuth } from '~/utils/withSSRAuth';
+import { ISchedules } from '~/types/schedule';
+import { withSSRAuth } from '~/utils/security/withSSRAuth';
 
-const agendas = ({ arrSchedules }: any) => {
+interface AgendasProps {
+  arrSchedules: ISchedules[];
+}
+
+const agendas = ({ arrSchedules }: AgendasProps) => {
   const { showCreateBBQ, showDetailsBBQ } = useModals();
-  const { data } = useSchedule({ initialData: arrSchedules });
+  const { data } = useGetSchedules({
+    initialData: arrSchedules,
+  });
 
   function handleCreateSchedule() {
-    if (data) {
-      if (data?.length >= 3) {
-        toast(
-          <CustomToast
-            status="warn"
-            title="Atenção!"
-            message="Usuário só pode ter 3 agendas."
-          />,
-          {
-            icon: false,
-            autoClose: 5000,
-          }
-        );
-        return;
-      }
+    if (data && data?.length >= 3) {
+      toast(
+        <CustomToast
+          status="warn"
+          title="Atenção!"
+          message="Usuário só pode ter 3 agendas."
+        />,
+        {
+          icon: false,
+          autoClose: 5000,
+        }
+      );
+      return;
     }
+
     showCreateBBQ();
   }
 
@@ -74,7 +80,10 @@ const agendas = ({ arrSchedules }: any) => {
 export default agendas;
 
 export const getServerSideProps = withSSRAuth(async (ctx) => {
-  const data = await getAllSchedule(ctx);
+  const apiServer = setupAPI(ctx);
+
+  const { data } = await apiServer.get('/schedules/all');
+
   return {
     props: { arrSchedules: data },
   };
