@@ -4,6 +4,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { ToastContainer } from 'react-toastify';
 
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
 
 import { PortalModals } from '~/components/HOC/ChildPortalModals';
 import '~/styles/nprogress.css';
@@ -16,6 +17,10 @@ import 'react-toastify/dist/ReactToastify.css';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
+      <Head>
+        <title>Agenda de Churras</title>
+      </Head>
+
       <UseContexts>
         <Component {...pageProps} />
         <ResetStyle />

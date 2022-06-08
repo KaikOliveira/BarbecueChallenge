@@ -16,8 +16,6 @@ export default class MyDocument extends Document {
           />
 
           <meta name="theme-color" content="#e93535" />
-
-          <title>Agenda de Churras</title>
         </Head>
 
         <body>
