@@ -1,9 +1,8 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 
-import { parseCookies } from 'nookies';
-
 import { CustomToast } from '~/components/CustomToast';
+import { Loading } from '~/components/Loading';
 import { useModals } from '~/hooks/contexts/useModals';
 import { api } from '~/services/client';
 
@@ -20,10 +19,10 @@ interface IDataBBQ {
 }
 
 export const DetailsBBQ: React.FC = () => {
-  const cookies = parseCookies();
   const { detailsBBQ, idShowSchedule, onCloseDetailsBQQ } = useModals();
 
-  const [data, setData] = React.useState<IDataBBQ>();
+  const [data, setData] = React.useState<IDataBBQ | null>(null);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     if (idShowSchedule !== '') {
@@ -33,15 +32,10 @@ export const DetailsBBQ: React.FC = () => {
 
   async function getDataBBQ() {
     try {
-      const headers = {
-        Authorization: `Bearer ${cookies['@Barbecue:token']}`,
-      };
+      setIsLoading(true);
 
       const { data: details } = await api.get(
-        `schedules/show/${idShowSchedule}`,
-        {
-          headers,
-        }
+        `schedules/show/${idShowSchedule}`
       );
 
       setData(details);
@@ -58,6 +52,8 @@ export const DetailsBBQ: React.FC = () => {
           autoClose: 5000,
         }
       );
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -74,7 +70,7 @@ export const DetailsBBQ: React.FC = () => {
         </CustomSheetStyled.Header>
         <CustomSheetStyled.Content>
           <Container>
-            <h1>fdsafdas</h1>
+            {isLoading ? <Loading /> : <h1>{data?.title}</h1>}
           </Container>
         </CustomSheetStyled.Content>
       </CustomSheetStyled.Container>
