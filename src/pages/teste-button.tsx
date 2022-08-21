@@ -16,7 +16,11 @@ const TesteButton: React.FC = () => {
         backgroundColor: 'fcfcfc',
       }}
     >
-      <Button />
+      <div style={{ width: '150px', height: '80px', border: '1px solid red' }}>
+        <Button height="50px" backgroundColor="#2274A5">
+          Button
+        </Button>
+      </div>
     </div>
   );
 };
