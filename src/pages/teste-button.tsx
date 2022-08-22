@@ -2,7 +2,8 @@ import React from 'react';
 
 import { Button } from 'button-ripple-react';
 
-// import { Container } from './styles';
+import { BBQ } from '~/assets/icons';
+import { Container } from '~/styles/pages/teste-button';
 
 const TesteButton: React.FC = () => {
   return (
@@ -16,11 +17,24 @@ const TesteButton: React.FC = () => {
         backgroundColor: 'fcfcfc',
       }}
     >
-      <div style={{ width: '150px', height: '80px', border: '1px solid red' }}>
-        <Button height="50px" backgroundColor="#2274A5">
-          Button
+      <Container>
+        <Button
+          isLoading={true}
+          loadingIcon={<BBQ />}
+          height="50px"
+          backgroundColor="#2274A5"
+        >
+          Custom loading
         </Button>
-      </div>
+
+        <Button isLoading={true} height="50px" backgroundColor="#c81d25">
+          Default Loading
+        </Button>
+
+        <Button height="50px" backgroundColor="#087e8b">
+          Default Loading
+        </Button>
+      </Container>
     </div>
   );
 };
