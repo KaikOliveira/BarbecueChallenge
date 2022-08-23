@@ -10,3 +10,9 @@ export const Container = styled.div`
   align-items: center;
   gap: 13px;
 `;
+
+export const Text = styled.span`
+  font-size: 14px;
+  color: #fff;
+  font-weight: 400;
+`;

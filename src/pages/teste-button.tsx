@@ -1,9 +1,10 @@
 import React from 'react';
+import { FiHeart } from 'react-icons/fi';
 
 import { Button } from 'button-ripple-react';
 
 import { BBQ } from '~/assets/icons';
-import { Container } from '~/styles/pages/teste-button';
+import { Container, Text } from '~/styles/pages/teste-button';
 
 const TesteButton: React.FC = () => {
   return (
@@ -20,7 +21,7 @@ const TesteButton: React.FC = () => {
       <Container>
         <Button
           isLoading={true}
-          loadingIcon={<BBQ />}
+          loadingIcon={<FiHeart size={20} />}
           height="50px"
           backgroundColor="#2274A5"
         >
@@ -32,7 +33,11 @@ const TesteButton: React.FC = () => {
         </Button>
 
         <Button height="50px" backgroundColor="#087e8b">
-          Default Loading
+          <Text>Default</Text>
+        </Button>
+
+        <Button height="50px" backgroundColor="#087e8b" disabled={true}>
+          <Text>Default Disabled</Text>
         </Button>
       </Container>
     </div>
