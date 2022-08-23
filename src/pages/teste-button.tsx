@@ -3,8 +3,7 @@ import { FiHeart } from 'react-icons/fi';
 
 import { Button } from 'button-ripple-react';
 
-import { BBQ } from '~/assets/icons';
-import { Container, Text } from '~/styles/pages/teste-button';
+import { Container, Text, P } from '~/styles/pages/teste-button';
 
 const TesteButton: React.FC = () => {
   return (
@@ -19,6 +18,22 @@ const TesteButton: React.FC = () => {
       }}
     >
       <Container>
+        <P>Default</P>
+        <Button height="50px" backgroundColor="#087e8b">
+          <Text>Default</Text>
+        </Button>
+
+        <P>Default Disabed</P>
+        <Button height="50px" backgroundColor="#087e8b" disabled={true}>
+          <Text>Default Disabled</Text>
+        </Button>
+
+        <P>Default Loading</P>
+        <Button isLoading={true} height="50px" backgroundColor="#c81d25">
+          Default Loading
+        </Button>
+
+        <P>Custom loading icon</P>
         <Button
           isLoading={true}
           loadingIcon={<FiHeart size={20} />}
@@ -26,18 +41,6 @@ const TesteButton: React.FC = () => {
           backgroundColor="#2274A5"
         >
           Custom loading
-        </Button>
-
-        <Button isLoading={true} height="50px" backgroundColor="#c81d25">
-          Default Loading
-        </Button>
-
-        <Button height="50px" backgroundColor="#087e8b">
-          <Text>Default</Text>
-        </Button>
-
-        <Button height="50px" backgroundColor="#087e8b" disabled={true}>
-          <Text>Default Disabled</Text>
         </Button>
       </Container>
     </div>
