@@ -8,8 +8,8 @@ import type { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
 import * as Yup from 'yup';
 
+import { Input } from '~/components/common/Input';
 import { Header } from '~/components/Header';
-import { Input } from '~/components/Input';
 import { useAuth } from '~/hooks/contexts/useAuth';
 import { signUpSchema } from '~/shared/validators/authSchema';
 import { Container, LinkSignIn } from '~/styles/pages/signUp';

@@ -7,13 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "typecheck": "tsc --project tsconfig.json",
     "test": "jest --watchAll"
   },
   "dependencies": {
     "@unform/core": "^2.1.6",
     "@unform/web": "^2.1.6",
     "axios": "^0.24.0",
-    "button-ripple-react": "^1.0.5",
+    "button-ripple-react": "^1.0.7",
     "framer-motion": "^4.1.17",
     "next": "^12.1.0",
     "nookies": "^2.5.2",

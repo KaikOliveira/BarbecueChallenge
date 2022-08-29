@@ -11,7 +11,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ComponentType<IconBaseProps>;
 }
 
-export const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
+export const Input = ({ name, icon: Icon, ...rest }: InputProps) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   const { fieldName, defaultValue, error, registerField, clearError } =

@@ -9,8 +9,8 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
+import { Input } from '~/components/common/Input';
 import { CustomToast } from '~/components/CustomToast';
-import { Input } from '~/components/Input';
 import { useModals } from '~/hooks/contexts/useModals';
 import { useCreateSchedule } from '~/hooks/querys/useSchedules';
 import { createScheduleSchema } from '~/shared/validators/scheduleSchema';
