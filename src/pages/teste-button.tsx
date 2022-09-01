@@ -12,7 +12,7 @@ const TesteButton: React.FC = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 5000);
+    }, 3000);
   }
 
   return (
@@ -52,10 +52,9 @@ const TesteButton: React.FC = () => {
           Custom loading
         </Button>
 
-        <P>Active loading 5s</P>
+        <P>Active loading 3s</P>
         <Button
           height="50px"
-          backgroundColor="#087e8b"
           onClick={() => handleActiveLoading()}
           isLoading={isLoading}
         >
