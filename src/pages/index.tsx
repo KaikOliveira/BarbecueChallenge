@@ -1,5 +1,4 @@
 import React from 'react';
-import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { FiUser, FiLock } from 'react-icons/fi';
 
 import { FormHandles } from '@unform/core';
@@ -52,23 +51,32 @@ const Home: NextPage = () => {
         <h1>Agenda Churrasco</h1>
 
         <span>Usuário</span>
-        <Input type="text" name="user" placeholder="Usuário" icon={FiUser} />
+        <Input
+          type="text"
+          name="user"
+          placeholder="Usuário"
+          icon={<FiUser size={20} />}
+        />
 
         <span className="last">Senha</span>
         <Input
           type="password"
           name="password"
           placeholder="Senha"
-          icon={FiLock}
+          icon={<FiLock size={20} />}
         />
 
         <Link href="/cadastro">
           <Styled.LinkSignUp>Criar nova conta</Styled.LinkSignUp>
         </Link>
 
-        <button type="submit" disabled={loading}>
-          {loading ? <AiOutlineLoading3Quarters size={20} /> : 'Entrar'}
-        </button>
+        <Styled.Button
+          type="submit"
+          isLoading={loading}
+          backgroundColor="#383B42"
+        >
+          <p>Entrar</p>
+        </Styled.Button>
       </Form>
     </Styled.Wrapper>
   );

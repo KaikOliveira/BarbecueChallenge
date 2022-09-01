@@ -1,5 +1,4 @@
 import React from 'react';
-import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { FiLock, FiUser } from 'react-icons/fi';
 
 import { FormHandles } from '@unform/core';
@@ -12,7 +11,7 @@ import { Input } from '~/components/common/Input';
 import { Header } from '~/components/Header';
 import { useAuth } from '~/hooks/contexts/useAuth';
 import { signUpSchema } from '~/shared/validators/authSchema';
-import { Container, LinkSignIn } from '~/styles/pages/signUp';
+import * as Styled from '~/styles/pages/signUp';
 import { ISignUp } from '~/types/auth';
 import { getValidationErrors } from '~/utils/getValidationErrors';
 import { withSSRGuest } from '~/utils/security/withSSRGuest';
@@ -46,7 +45,7 @@ const signUp: NextPage = () => {
   };
 
   return (
-    <Container>
+    <Styled.Container>
       <Header small={false} title={true} />
 
       <Form ref={formRef} onSubmit={handleSignUp}>
@@ -67,14 +66,18 @@ const signUp: NextPage = () => {
         />
 
         <Link href="/">
-          <LinkSignIn>Entrar</LinkSignIn>
+          <Styled.LinkSignIn>Entrar</Styled.LinkSignIn>
         </Link>
 
-        <button type="submit" disabled={loading}>
-          {loading ? <AiOutlineLoading3Quarters size={20} /> : 'Finalizar'}
-        </button>
+        <Styled.Button
+          type="submit"
+          isLoading={loading}
+          backgroundColor="#383B42"
+        >
+          <p>Finalizar</p>
+        </Styled.Button>
       </Form>
-    </Container>
+    </Styled.Container>
   );
 };
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { IconBaseProps } from 'react-icons';
 import { FiAlertCircle } from 'react-icons/fi';
 
 import { useField } from '@unform/core';
@@ -8,10 +7,10 @@ import { Container, Error } from './styles';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
-  icon?: React.ComponentType<IconBaseProps>;
+  icon?: React.ReactNode;
 }
 
-export const Input = ({ name, icon: Icon, ...rest }: InputProps) => {
+export const Input = ({ name, icon, ...rest }: InputProps) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   const { fieldName, defaultValue, error, registerField, clearError } =
@@ -42,7 +41,7 @@ export const Input = ({ name, icon: Icon, ...rest }: InputProps) => {
 
   return (
     <Container isErrored={!!error} isFilled={isFilled} isFocused={isFocused}>
-      {Icon && <Icon size={20} />}
+      {icon}
       <input
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}

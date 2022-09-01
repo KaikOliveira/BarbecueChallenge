@@ -6,6 +6,15 @@ import { Button } from 'button-ripple-react';
 import { Container, Text, P } from '~/styles/pages/teste-button';
 
 const TesteButton: React.FC = () => {
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  function handleActiveLoading() {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
+  }
+
   return (
     <div
       style={{
@@ -41,6 +50,16 @@ const TesteButton: React.FC = () => {
           backgroundColor="#2274A5"
         >
           Custom loading
+        </Button>
+
+        <P>Active loading 5s</P>
+        <Button
+          height="50px"
+          backgroundColor="#087e8b"
+          onClick={() => handleActiveLoading()}
+          isLoading={isLoading}
+        >
+          <Text>Click me</Text>
         </Button>
       </Container>
     </div>

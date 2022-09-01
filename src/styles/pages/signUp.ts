@@ -1,3 +1,4 @@
+import { Button as BaseButton } from 'button-ripple-react';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -8,7 +9,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
 
   form {
     position: absolute;
@@ -40,46 +40,6 @@ export const Container = styled.div`
         margin-top: 2rem;
       }
     }
-
-    button {
-      width: 100%;
-      height: 5rem;
-      background: var(--text);
-      border-radius: 0.8rem;
-      box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.06);
-      color: var(--white);
-      border: 0 none;
-      font-size: 1.8rem;
-      font-weight: 700;
-      transition: all 0.3s ease-in;
-      margin-top: 1.6rem;
-
-      &:hover {
-        background: var(--text-high);
-      }
-
-      &:disabled {
-        cursor: not-allowed;
-
-        &:hover {
-          background: var(--text);
-          color: var(--white);
-        }
-      }
-
-      svg {
-        animation: loading 1.5s linear infinite;
-      }
-
-      @keyframes loading {
-        0% {
-          transform: rotateZ(0deg);
-        }
-        100% {
-          transform: rotateZ(-360deg);
-        }
-      }
-    }
   }
 `;
 
@@ -91,9 +51,24 @@ export const LinkSignIn = styled.p`
   color: var(--gray-high);
   cursor: pointer;
   transition: all 0.3s ease-in;
+  user-select: none;
 
   &:hover {
     text-decoration: underline;
     color: var(--primary-high);
+  }
+`;
+
+export const Button = styled(BaseButton)`
+  width: 100%;
+  height: 5rem;
+  margin-top: 1.6rem;
+  border-radius: 0.8rem;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.06);
+
+  p {
+    color: var(--white);
+    font-size: 1.8rem;
+    font-weight: 700;
   }
 `;
